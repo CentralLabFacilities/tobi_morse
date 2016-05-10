@@ -1,0 +1,33 @@
+<launch>
+
+    <arg name="world" />
+
+    <param name="/use_sim_time" value="true" />
+
+    <!-- Stage -->
+    <!-- <node pkg="stage_ros" type="stageros" name="stageros" args="$(arg world).world" /> -->
+    <node pkg="tf" type="static_transform_publisher" name="link0_broadcaster" args="0 0 0 0 0 0 1 base_footprint base_link 100" />
+    <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0 0 0 0 1 base_link base_laser_link 100" />
+    <node pkg="tf" type="static_transform_publisher" name="link2_broadcaster" args="0 0 0 0 0 0 1 base_laser_link laser_front 100" />
+    <!-- provide laser scans on the same topic as on the real robot -->
+    <node pkg="topic_tools" type="relay" name="base_scan_relay" args="/base_scan /scan_merged" />
+    <node pkg="topic_tools" type="relay" name="scan_relay" args="/base_scan /scan" />
+
+    <!-- Run gmapping -->
+    <include file="$(find tobi_navigation)/launch/gmapping.launch" >
+        <arg name="topic_scan" value="/base_scan" />
+    </include>
+
+    <!-- Run move_base -->
+    <node pkg="move_base" type="move_base" respawn="true" name="move_base" output="screen">
+        <remap from="/scan_filtered" to="/base_scan" />
+        <rosparam file="$(find tobi_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find tobi_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find tobi_navigation)/config/costmap_local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find tobi_navigation)/config/costmap_global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find tobi_navigation)/config/base_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find tobi_navigation)/config/move_base_params.yaml" command="load" />
+    </node>
+</launch>
+
+
