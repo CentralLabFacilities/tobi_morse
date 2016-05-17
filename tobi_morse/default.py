@@ -1,6 +1,4 @@
 from morse.builder import *
-from tobi_morse.builder.robots import Tobi
-
 
 #tobi = Pioneer3DX()
 tobi = PatrolBot()
@@ -38,8 +36,8 @@ motion.properties(ControlType='Position')
 tobi.append(motion)
 motion.add_interface("ros", topic="/cmd_vel")
 
-# human = Human()
-# human.translate(x=2.0, y=-2.2, z=0.0)
+human = Human()
+human.translate(x=2.0, y=-2.2, z=0.0)
 
 #env = Environment('tum_kitchen/tum_kitchen', fastmode=False)
 #env = Environment('indoors-1/indoor-1', fastmode=False)
