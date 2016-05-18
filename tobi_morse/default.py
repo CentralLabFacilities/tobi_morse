@@ -1,27 +1,21 @@
 from morse.builder import *
 
-tobi = Pioneer3DX()
-#tobi = PatrolBot()
-# tobi = Tobi()
-# tobi.translate(x=2.0, y=-2.0, z=0.00)
-# tobi.translate(x=2.0, y=0.0, z=-0.02)
+# Add the TOBI robot
+tobi = PatrolBot()
 
+# Add a clock for simulation time
 clock = Clock()
 tobi.append(clock)
 clock.add_interface('ros', topic="/clock")
 
-#keyboard = Keyboard()
-#tobi.append(keyboard)
-
+# Add an odometry sensor
 odometry = Odometry()
 tobi.append(odometry)
 odometry.add_stream("ros", topic="/odom")
 
-pose = Pose()
-tobi.append(pose)
-
+# A Sick laser scanner
 scan = Sick()
-scan.translate(x=0.05, y=0.0, z=0.051)
+scan.translate(x=0.05, y=0.0, z=0.1)
 scan.properties(Visible_arc = True)
 scan.properties(laser_range = 9.0)
 scan.properties(resolution = 1.0)
@@ -31,23 +25,26 @@ scan.frequency(40.0)
 scan.add_stream("ros", topic="/base_scan")
 tobi.append(scan)
 
+# A differential drive actuator
 motion = MotionVWDiff()
 motion.properties(ControlType='Position')
 tobi.append(motion)
 motion.add_interface("ros", topic="/cmd_vel")
 
+# A human avatar
 human = Human()
 human.translate(x=2.0, y=-2.2, z=0.0)
 human_motion = Waypoint()
 human_motion.properties(ControlType="Position")
 human.append(human_motion)
-human_motion.add_stream('socket')
+human_motion.add_interface("ros", topic="/human_pose")
 
-#env = Environment('tum_kitchen/tum_kitchen', fastmode=False)
-env = Environment('indoors-1/indoor-1', fastmode=False)
-#env = Environment('test', fastmode=False)
-#env = Environment('laas/grande_salle', fastmode=False)
-#env = Environment('apartment', fastmode=False)
-#env = Environment('outdoors', fastmode=False)
-#env.set_camera_rotation([1.0470, 0, 5.7854])
-#env.set_camera_location([-12.0, -16.0, 10.0])
+# Control The Human with a Keyboard
+keyboard = Keyboard()
+human.append(keyboard)
+
+# Set the environment
+env = Environment('test', fastmode=False)
+# env = Environment('indoors-1/indoor-1')
+
+
