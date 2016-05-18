@@ -1,4 +1,5 @@
 # STD Imports
+import sys
 import cv2
 from Queue import Queue
 
@@ -35,7 +36,7 @@ class ROSImage:
 
 class RSBPublisher():
     def __init__(self):
-        self.informer = rsb.createInformer("/video", dataType=cv2.cv.iplimage)
+        self.informer = rsb.createInformer(str(sys.argv[1]), dataType=cv2.cv.iplimage)
 
     def pub(self, data):
         self.informer.publishData(data)
