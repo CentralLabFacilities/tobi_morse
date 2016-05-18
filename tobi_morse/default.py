@@ -16,10 +16,10 @@ odometry.add_stream("ros", topic="/odom")
 # A Sick laser scanner
 scan = Sick()
 scan.translate(x=0.05, y=0.0, z=0.1)
-scan.properties(Visible_arc = True)
-scan.properties(laser_range = 9.0)
-scan.properties(resolution = 1.0)
-scan.properties(scan_window = 180.0)
+scan.properties(Visible_arc=False)
+scan.properties(laser_range=9.0)
+scan.properties(resolution=1.0)
+scan.properties(scan_window=180.0)
 scan.create_laser_arc()
 scan.frequency(40.0)
 scan.add_stream("ros", topic="/base_scan")
@@ -30,6 +30,13 @@ motion = MotionVWDiff()
 motion.properties(ControlType='Position')
 tobi.append(motion)
 motion.add_interface("ros", topic="/cmd_vel")
+
+# Video Camera
+videocamera = VideoCamera()
+videocamera.translate(0.0, -0.10, 1.35)
+videocamera.properties(cam_width=640, cam_height=480, cam_focal=35.0, capturing=True, Vertical_Flip=True)
+tobi.append(videocamera)
+videocamera.add_interface("ros", topic="/morse/rgb_cam/")
 
 # A human avatar
 human = Human()
