@@ -51,7 +51,7 @@ keyboard = Keyboard()
 human.append(keyboard)
 
 # Set the environment
-env = Environment('test', fastmode=False)
-# env = Environment('indoors-1/indoor-1')
+#env = Environment('test', fastmode=False)
+env = Environment('indoors-1/indoor-1')
 
 
