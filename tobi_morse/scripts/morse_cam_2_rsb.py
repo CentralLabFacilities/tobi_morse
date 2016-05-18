@@ -29,7 +29,7 @@ class ROSImage:
             ipl_i = cv2.cv.CreateImageHeader((cv_img.shape[1], cv_img.shape[0]), cv2.cv.IPL_DEPTH_8U, 3)
             cv2.cv.SetData(ipl_i, cv_img.tostring(), cv_img.dtype.itemsize * 3 * cv_img.shape[1])
             self.rsb_publisher.pub(ipl_i)
-            print ">>> Publishing"
+            # print ">>> Publishing"
         except CvBridgeError as e:
             print e
 
@@ -47,6 +47,7 @@ if __name__ == "__main__":
     registerGlobalConverter(IplimageConverter())
     rsb_p = RSBPublisher()
     ros_s = ROSImage(rsb_p)
+    print ">>> Publishing MORSE image to %s: " % sys.argv[1]
     try:
         rospy.spin()
     except KeyboardInterrupt:
