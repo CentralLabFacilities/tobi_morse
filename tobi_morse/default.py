@@ -22,7 +22,7 @@ scan.properties(resolution=1.0)
 scan.properties(scan_window=180.0)
 scan.create_laser_arc()
 scan.frequency(40.0)
-scan.add_stream("ros", topic="/base_scan")
+scan.add_stream("ros", topic="/scan")
 tobi.append(scan)
 
 # A differential drive actuator
