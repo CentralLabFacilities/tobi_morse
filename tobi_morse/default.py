@@ -39,23 +39,23 @@ tobi.append(videocamera)
 videocamera.add_interface("ros", topic="/morse/rgb_cam/")
 
 # Adding a waypoint Actuator
-waypoint_human = Waypoint()
+waypoint_human = Waypoint('motion')
 waypoint_human.properties(ObstacleAvoidance=False, ControlType="Position")
 
 # Adding a Pose sensor
 pose_human = Pose()
-
-# A human avatar
-human = Human()
-human.translate(x=2.0, y=-2.2, z=0.0)
-human.append(waypoint_human)
-human.append(pose_human)
 
 pose_human.add_stream('socket')
 pose_human.add_service('socket')
 
 waypoint_human.add_stream('socket')
 waypoint_human.add_service('socket')
+
+# A human avatar
+human = Human()
+human.translate(x=2.0, y=-2.2, z=0.0)
+human.append(waypoint_human)
+human.append(pose_human)
 
 # Control The Human with a Keyboard
 keyboard = Keyboard()
@@ -64,5 +64,6 @@ human.append(keyboard)
 # Set the environment
 env = Environment('test', fastmode=False)
 # env = Environment('indoors-1/indoor-1')
+env.add_service('socket')
 
 
