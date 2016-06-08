@@ -45,9 +45,13 @@ waypoint_human.properties(ObstacleAvoidance=False, ControlType="Position")
 # Adding a Pose sensor
 pose_human = Pose('pose_human')
 
+# Adding Orientation
+orientation_human = Orientation('orientation_human')
+orientation_human.add_stream('socket')
+orientation_human.add_service('socket')
+
 pose_human.add_stream('socket')
 pose_human.add_service('socket')
-
 waypoint_human.add_stream('socket')
 waypoint_human.add_service('socket')
 
