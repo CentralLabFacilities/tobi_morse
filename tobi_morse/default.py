@@ -52,7 +52,10 @@ human.append(waypoint_human)
 human.append(pose_human)
 
 pose_human.add_stream('socket')
+pose_human.add_service('socket')
+
 waypoint_human.add_stream('socket')
+waypoint_human.add_service('socket')
 
 # Control The Human with a Keyboard
 keyboard = Keyboard()
