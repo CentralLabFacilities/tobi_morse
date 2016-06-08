@@ -38,13 +38,18 @@ videocamera.properties(cam_width=640, cam_height=480, cam_focal=35.0, capturing=
 tobi.append(videocamera)
 videocamera.add_interface("ros", topic="/morse/rgb_cam/")
 
+# Adding a waypoint Actuator
+waypoint_human = Waypoint()
+waypoint_human.properties(ObstacleAvoidance = False, ControlType = "Position")
+
+# Adding a Pose sensor
+pose_human = Pose()
+
 # A human avatar
 human = Human()
 human.translate(x=2.0, y=-2.2, z=0.0)
-human_motion = Waypoint()
-human_motion.properties(ControlType="Position")
-human.append(human_motion)
-human_motion.add_interface("ros", topic="/human_pose")
+human.append(waypoint_human)
+human.append(pose_human)
 
 # Control The Human with a Keyboard
 keyboard = Keyboard()
