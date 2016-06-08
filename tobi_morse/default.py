@@ -46,9 +46,9 @@ waypoint_human.properties(ObstacleAvoidance=False, ControlType="Position")
 pose_human = Pose('pose_human')
 
 # Adding Orientation
-orientation_human = Orientation('orientation_human')
+# orientation_human = Orientation('orientation_human')
 
-orientation_human.add_stream('socket')
+# orientation_human.add_stream('socket')
 #orientation_human.add_service('socket')
 pose_human.add_stream('socket')
 # pose_human.add_service('socket')
@@ -60,7 +60,7 @@ human = Human()
 human.translate(x=2.0, y=-2.2, z=0.0)
 human.append(waypoint_human)
 human.append(pose_human)
-human.append(orientation_human)
+# human.append(orientation_human)
 
 # Control The Human with a Keyboard
 keyboard = Keyboard()
