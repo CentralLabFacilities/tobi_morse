@@ -48,11 +48,11 @@ pose_human = Pose('pose_human')
 # Adding Orientation
 orientation_human = Orientation('orientation_human')
 
-orientation_human.add_stream('socket')
+# orientation_human.add_stream('socket')
 orientation_human.add_service('socket')
-pose_human.add_stream('socket')
+# pose_human.add_stream('socket')
 pose_human.add_service('socket')
-waypoint_human.add_stream('socket')
+# waypoint_human.add_stream('socket')
 waypoint_human.add_service('socket')
 
 # A human avatar
@@ -69,6 +69,6 @@ human.append(keyboard)
 # Set the environment
 env = Environment('test', fastmode=False)
 # env = Environment('indoors-1/indoor-1')
-env.add_service('socket')
+# env.add_service('socket')
 
 
