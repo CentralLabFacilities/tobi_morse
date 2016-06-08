@@ -39,11 +39,11 @@ tobi.append(videocamera)
 videocamera.add_interface("ros", topic="/morse/rgb_cam/")
 
 # Adding a waypoint Actuator
-waypoint_human = Waypoint('motion')
+waypoint_human = Waypoint('waypoint_human')
 waypoint_human.properties(ObstacleAvoidance=False, ControlType="Position")
 
 # Adding a Pose sensor
-pose_human = Pose()
+pose_human = Pose('pose_human')
 
 pose_human.add_stream('socket')
 pose_human.add_service('socket')
