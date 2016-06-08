@@ -40,27 +40,20 @@ videocamera.add_interface("ros", topic="/morse/rgb_cam/")
 
 # Adding a waypoint Actuator
 waypoint_human = Waypoint('waypoint_human')
-waypoint_human.properties(ObstacleAvoidance=False, ControlType="Position")
+waypoint_human.properties(ObstacleAvoidance=True, ControlType="Position")
+waypoint_human.add_stream('socket')
+waypoint_human.add_service('socket')
 
 # Adding a Pose sensor
 pose_human = Pose('pose_human')
-
-# Adding Orientation
-# orientation_human = Orientation('orientation_human')
-
-# orientation_human.add_stream('socket')
-#orientation_human.add_service('socket')
 pose_human.add_stream('socket')
-# pose_human.add_service('socket')
-waypoint_human.add_stream('socket')
-# waypoint_human.add_service('socket')
 
 # A human avatar
 human = Human()
 human.translate(x=2.0, y=-2.2, z=0.0)
+human.rotate(0.0, 0.0, 3.1)
 human.append(waypoint_human)
 human.append(pose_human)
-# human.append(orientation_human)
 
 # Control The Human with a Keyboard
 keyboard = Keyboard()
