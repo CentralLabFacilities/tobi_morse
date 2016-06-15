@@ -20,7 +20,7 @@ from cv_bridge import CvBridge, CvBridgeError
 class ROSImage:
     def __init__(self, rsb_publisher):
         self.bridge = CvBridge()
-        self.image_sub = rospy.Subscriber("/morse/rgb_cam/image", Image, self.callback)
+        self.image_sub = rospy.Subscriber("/morse/tobi/rgb_cam/image", Image, self.callback)
         self.rsb_publisher = rsb_publisher
 
     def callback(self, data):
