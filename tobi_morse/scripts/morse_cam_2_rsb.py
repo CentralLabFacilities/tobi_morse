@@ -8,7 +8,7 @@ from Queue import Queue
 import rsb
 import rst
 from rsb.converter import registerGlobalConverter
-from rstconverters.opencv import Cv2ImageConverter
+from rstconverters import Cv2ImageConverter
 
 # ROS Specifics
 import rospy
@@ -25,10 +25,10 @@ class ROSImage:
 
     def callback(self, data):
         try:
-            cv_img = self.bridge.imgmsg_to_cv2(data, "bgr8")
-            ipl_i = cv2.cv.CreateImageHeader((cv_img.shape[1], cv_img.shape[0]), cv2.cv.IPL_DEPTH_8U, 3)
-            cv2.cv.SetData(ipl_i, cv_img.tostring(), cv_img.dtype.itemsize * 3 * cv_img.shape[1])
-            self.rsb_publisher.pub(ipl_i)
+            cv_img = self.bridge.imgmsg_to_cv2(data, "passthrough")
+            # cv_2_img = cv2.cv.CreateImageHeader((cv_img.shape[1], cv_img.shape[0]), cv2.cv.IPL_DEPTH_8U, 3)
+            # cv2.cv.SetData(ipl_i, cv_img.tostring(), cv_img.dtype.itemsize * 3 * cv_img.shape[1])
+            self.rsb_publisher.pub(cv_img)
             # print ">>> Publishing"
         except CvBridgeError as e:
             print e
