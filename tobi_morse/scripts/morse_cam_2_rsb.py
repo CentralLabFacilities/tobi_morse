@@ -1,4 +1,5 @@
 # STD Imports
+import numpy as np
 import sys
 import cv2
 from Queue import Queue
@@ -6,9 +7,8 @@ from Queue import Queue
 # RSB Specifics
 import rsb
 import rst
-import rstsandbox
 from rsb.converter import registerGlobalConverter
-from rstconverters.opencv import IplimageConverter
+from rstconverters.opencv import Cv2ImageConverter
 
 # ROS Specifics
 import rospy
@@ -36,7 +36,7 @@ class ROSImage:
 
 class RSBPublisher():
     def __init__(self):
-        self.informer = rsb.createInformer(str(sys.argv[1]), dataType=cv2.cv.iplimage)
+        self.informer = rsb.createInformer(str(sys.argv[1]), dataType=np.ndarray)
 
     def pub(self, data):
         self.informer.publishData(data)
@@ -44,7 +44,7 @@ class RSBPublisher():
 
 if __name__ == "__main__":
     rospy.init_node('MORSE2RSBIMAGE', anonymous=True)
-    registerGlobalConverter(IplimageConverter())
+    registerGlobalConverter(Cv2ImageConverter())
     rsb_p = RSBPublisher()
     ros_s = ROSImage(rsb_p)
     print ">>> Publishing MORSE image to %s: " % sys.argv[1]
@@ -52,3 +52,4 @@ if __name__ == "__main__":
         rospy.spin()
     except KeyboardInterrupt:
         print("Shutting down")
+
