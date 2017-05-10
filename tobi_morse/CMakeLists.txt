@@ -19,4 +19,5 @@ INSTALL(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/scripts/morse_move_human.sh" DESTI
 INSTALL(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/models/human_rig.blend" DESTINATION ${PREFIX}/share/morse/data/robots)
 INSTALL(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/models/patrolbot.blend" DESTINATION ${PREFIX}/share/morse/data/robots)
 INSTALL(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/models/test.blend" DESTINATION ${PREFIX}/share/morse/data/environments)
+INSTALL(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/models/apartment.blend" DESTINATION ${PREFIX}/share/morse/data/environments)
 INSTALL(PROGRAMS "${CMAKE_CURRENT_SOURCE_DIR}/default.py" DESTINATION ${PREFIX}/share/tobi_morse)

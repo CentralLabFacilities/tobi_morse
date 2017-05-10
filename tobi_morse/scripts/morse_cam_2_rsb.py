@@ -35,7 +35,7 @@ class ROSImage:
             print e
 
 
-class RSBPublisher():
+class RSBPublisher:
     def __init__(self):
         self.informer = rsb.createInformer(str(sys.argv[1]), dataType=np.ndarray)
 
